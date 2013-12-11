@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Test</title>
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="jquery.ChinaCitySelect.js"></script>
+  </head>
+
+  <body>
+<p><select id="country"></select>&nbsp;<select id="state"></select>&nbsp;<select id="city"></select>&nbsp;<select id="district"></select></p>
+
+  <input type="button" value="test" onclick="doTest()">
+  <input type="button" value="testLoc" onclick="doTestLoc()">
+  <div id="holder"></div>
+  </body>
+  
+  <script type="text/javascript" >
+    function addToList(id,value,text){
+        return $('#'+id).append('<option value="'+value+'">'+text+'</option>');
+    }
+    var cityHolder = 0;
+    var cityHolder2 = 0;
+    $(document).ready(function(){
+        $('#country').change(function(){
+            if($(this).val() == 0){
+                $('#state').show();
+                $('#city').show();
+                $('#district').show();
+                cityHolder = $('#holder').ChinaCitySelect({'prov':'#state','city':'#city','dist':'#district',url:'city.json'});
+                cityHolder2 = $('#holder').ChinaCitySelect({url:'city.json'});
+            }else{
+                $('#state').hide();
+                $('#city').hide();
+                $('#district').hide();
+            }
+        });
+        addToList('country',-1,'请选择国家');
+        addToList('country',0,'中国');
+        addToList('country',1,'其它');
+    });
+    
+    function doTest(){
+        alert(cityHolder.getCurrValue());
+    }
+    function doTestLoc(){
+        alert(cityHolder2.parseLoc('110229'));
+    }
+  </script>
+  
+</html>
