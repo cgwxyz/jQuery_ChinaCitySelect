@@ -8,6 +8,9 @@ Example:
 ----
 	<p><select id="country"></select>&nbsp;<select id="state"></select>&nbsp;<select id="city"></select>&nbsp;<select id="district"></select></p>
 	<script type="text/javascript" >
+		function addToList(id,value,text){
+            return $('#'+id).append('<option value="'+value+'">'+text+'</option>');
+        }
 		var cityHolder = 0;
 		var cityHolder2 = 0;
 		$(document).ready(function(){
